@@ -33,6 +33,17 @@ router.get('/', async (req,res) => {
     }
 })
 
+//GET all available image item's IDs
+router.get('/IDs', async (req,res) => {
+    try{
+        //Retornar todos las ids de las imagenes de la DB
+        const ids = await (await ImageItem.find({}, {projection: { _id: 1}})); // "projection" indica los campos que se incluirán en la respuesta
+        res.json(ids);
+    }catch(err){
+        res.json({message:err}); //devolver error en caso de fallo
+    }
+})
+
 //GET a specific image item
 router.get('/:imageId', async (req,res) => {
     //imageId se añade en http://192.168.1.135:3000/posts/:imageId
