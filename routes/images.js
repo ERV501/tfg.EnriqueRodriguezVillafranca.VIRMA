@@ -20,8 +20,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage}); //carpeta donde se guardaran las imagenes
 
-//ROUTES
-
 //GET all available image items
 router.get('/', async (req,res) => {
     try{
@@ -36,8 +34,8 @@ router.get('/', async (req,res) => {
 //GET all available image item's IDs
 router.get('/IDs', async (req,res) => {
     try{
-        //Retornar todos las ids de las imagenes de la DB
-        const ids = await (await ImageItem.find({}, {projection: { _id: 1}})); // "projection" indica los campos que se incluirán en la respuesta
+        //Retornar todos las IDs de las imagenes de la DB
+        const ids = await ImageItem.find({}, {projection: { _id: 1}}); // "projection" indica los campos que se incluirán en la respuesta
         res.json(ids);
     }catch(err){
         res.json({message:err}); //devolver error en caso de fallo
@@ -102,6 +100,20 @@ router.patch('/:imageId', async (req,res) => {
         );
         
         res.json(updateImage);
+
+    }catch(err){
+        res.json({message:err}); //devolver error en caso de fallo
+    }
+})
+
+//DOWNLOAD files
+router.get('/uploads/:fileName', async(req, res) => {
+    
+  try{
+    //Retornar imagen con determinada ID
+    const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+    
+    res.download(file); // Set disposition and send it.
 
     }catch(err){
         res.json({message:err}); //devolver error en caso de fallo
