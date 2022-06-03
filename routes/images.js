@@ -111,7 +111,7 @@ router.get('/uploads/:fileName', async(req, res) => {
     
   try{
     //Retornar imagen con determinada ID
-    const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+    const file = './uploads/' + req.params.fileName;
     
     res.download(file); // Set disposition and send it.
 
