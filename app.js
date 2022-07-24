@@ -20,7 +20,7 @@ app.get('/',(req,res) => {
 
 //Connect to DB
 mongoose.connect(
-    'mongodb+srv://erv:erv@rest.kjphb.mongodb.net/test'
+    'mongodb_DB'
     ,{useNewUrlParser: true}
     ,() => console.log('Connected to DB')
 );
